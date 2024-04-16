@@ -1,0 +1,13 @@
+{
+  "name": "h2sbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^22.6.5"
+  }
+}
+
