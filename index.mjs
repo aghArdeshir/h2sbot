@@ -1,8 +1,7 @@
-import { writeFileSync } from "fs";
 import puppeteer from "puppeteer";
+import { processHomes } from "./processHomes.mjs";
 
-const HEADLESS = false;
-const MINIMUM_LIVING_AREA = 35;
+const HEADLESS = true;
 const URL =
   "https://holland2stay.com/residences?available_to_book%5Bfilter%5D=Available+to+book%2C179&price%5Bfilter%5D=0-1300%2C0_1300&page=1";
 
@@ -18,6 +17,9 @@ const URL =
   const closePageTimeout = setTimeout(() => {
     browser.close();
   }, 20000);
+
+  // TODO: add event listener for request and abort unnecessary requests so that
+  //       we don't get caught by cloudflare o whatever
 
   page.on("requestfinished", async (request) => {
     let responseAsJson;
@@ -40,7 +42,7 @@ const URL =
     }
 
     if (homes.length > 0) {
-      writeFileSync("homes.json", JSON.stringify(homes, null, 2));
+      processHomes(homes);
       await browser.close();
       clearTimeout(closePageTimeout);
     }
