@@ -1,2 +1,4 @@
 /homes.json
 /node_modules
+/homesThatWeDontWant.txt
+/homesToNotify.json
