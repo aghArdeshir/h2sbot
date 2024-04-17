@@ -1,8 +1,6 @@
 import puppeteer from "puppeteer";
+import "./setup-env.mjs";
 import { processHomes } from "./processHomes.mjs";
-import { config as dotenvConfig } from "dotenv";
-
-dotenvConfig();
 
 const HEADLESS = true;
 const URL = process.env.URL;
