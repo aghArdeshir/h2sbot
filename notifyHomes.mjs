@@ -40,7 +40,7 @@ export function notifyHomes(homesToNotify) {
     const mailOptions = {
       from: SENDER_EMAIL,
       to: receiverEmail,
-      subject: "New H2S homes " + new Date().toDateString() + "!",
+      subject: "New H2S homes " + new Date().toString() + "!",
       text: homesToNotifyString,
     };
 
