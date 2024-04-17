@@ -2,3 +2,4 @@
 /node_modules
 /homesThatWeDontWant.txt
 /homesToNotify.json
+/.env
