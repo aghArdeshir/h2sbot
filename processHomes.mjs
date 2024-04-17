@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync } from "fs";
+import { notifyHomes } from "./notifyHomes.mjs";
 
 const MINIMUM_LIVING_AREA = 35;
 const HOMES_THAT_WE_DONT_WANT_FILE = "homesThatWeDontWant.txt";
@@ -65,5 +66,5 @@ export function processHomes(homes) {
       .join("\n")
   );
 
-  writeFileSync("homesToNotify.json", JSON.stringify(homesToNotify, null, 2));
+  notifyHomes(homesToNotify);
 }
