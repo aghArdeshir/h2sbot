@@ -3,9 +3,11 @@ import { processHomes } from "./processHomes.mjs";
 
 const HEADLESS = true;
 const URL =
-  "https://holland2stay.com/residences?available_to_book%5Bfilter%5D=Available+to+book%2C179&price%5Bfilter%5D=0-1300%2C0_1300&page=1";
+  "https://holland2stay.com/residences?available_to_book%5Bfilter%5D=Available+to+book%2C179&price%5Bfilter%5D=0-1300%2C0_1300&page=1"; // TODO: move to .env
 
 (async () => {
+  console.log("booting up");
+
   const browser = await puppeteer.launch({ headless: HEADLESS });
   const page = await browser.newPage();
   await page.goto(URL);
@@ -15,11 +17,14 @@ const URL =
 
   // close the browser after 20 seconds in case it is not closed
   const closePageTimeout = setTimeout(() => {
+    console.log("browser was not closed in 20 seconds, closing it now...");
     browser.close();
   }, 20000);
 
   // TODO: add event listener for request and abort unnecessary requests so that
   //       we don't get caught by cloudflare o whatever
+
+  console.log("navigated to the page");
 
   page.on("requestfinished", async (request) => {
     let responseAsJson;
@@ -42,7 +47,10 @@ const URL =
     }
 
     if (homes.length > 0) {
+      console.log("homes found, processing...");
       processHomes(homes);
+
+      console.log("closing browser");
       await browser.close();
       clearTimeout(closePageTimeout);
     }

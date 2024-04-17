@@ -14,19 +14,21 @@ if (SENDER_EMAIL === "enter sender email here") {
 
 export function notifyHomes(homesToNotify) {
   if (homesToNotify.length === 0) {
-    console.log("No new homes to notify. Exiting...");
+    console.log("No new homes to notify. returning...");
     return;
   }
 
   // just in case. For debugging...
   writeFileSync("homesToNotify.json", JSON.stringify(homesToNotify, null, 2));
 
+  console.log("preparing email content");
   const homesToNotifyString = homesToNotify
     .map((home) => {
       return `${home.name} - ${home.living_area}m2 - ${home.basic_rent}€ - ${home.link}`;
     })
     .join("\n");
 
+  console.log("booting up nodemailer");
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -35,7 +37,9 @@ export function notifyHomes(homesToNotify) {
     },
   });
 
+  console.log("sending emails to ", RECEIVER_EMAILS.join(" and "));
   RECEIVER_EMAILS.forEach((receiverEmail) => {
+    console.log("sending email to ", receiverEmail);
     const mailOptions = {
       from: SENDER_EMAIL,
       to: receiverEmail,

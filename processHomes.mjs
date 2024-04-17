@@ -1,13 +1,14 @@
 import { readFileSync, writeFileSync } from "fs";
 import { notifyHomes } from "./notifyHomes.mjs";
 
-const MINIMUM_LIVING_AREA = 35;
+const MINIMUM_LIVING_AREA = 35; // TODO: Move to .env
 const HOMES_THAT_WE_DONT_WANT_FILE = "homesThatWeDontWant.txt";
 
 export function processHomes(homes) {
-  // just in case
+  // just in case, for debugging
   writeFileSync("homes.json", JSON.stringify(homes, null, 2));
 
+  console.log("filtering homes that was already processed in previous runs");
   let namesOfExistingHomesThatWeDontWant;
   try {
     namesOfExistingHomesThatWeDontWant = readFileSync(
@@ -40,6 +41,7 @@ export function processHomes(homes) {
     aggregatedNamesOfHomesThatWeDontWant.join("\n")
   );
 
+  console.log('preparing list of homes to notify by email')
   const homesToNotify = homes
     .filter((home) => {
       return !aggregatedNamesOfHomesThatWeDontWant.includes(home.name);
@@ -66,5 +68,6 @@ export function processHomes(homes) {
       .join("\n")
   );
 
+  console.log("notifying homes");
   notifyHomes(homesToNotify);
 }
