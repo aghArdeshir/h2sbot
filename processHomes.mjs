@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "fs";
 import { notifyHomes } from "./notifyHomes.mjs";
 
-const MINIMUM_LIVING_AREA = 35; // TODO: Move to .env
+const MINIMUM_LIVING_AREA = process.env.MINIMUM_LIVING_AREA; // TODO: Move to .env
 const HOMES_THAT_WE_DONT_WANT_FILE = "homesThatWeDontWant.txt";
 
 export function processHomes(homes) {

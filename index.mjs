@@ -1,9 +1,11 @@
 import puppeteer from "puppeteer";
 import { processHomes } from "./processHomes.mjs";
+import { config as dotenvConfig } from "dotenv";
+
+dotenvConfig();
 
 const HEADLESS = true;
-const URL =
-  "https://holland2stay.com/residences?available_to_book%5Bfilter%5D=Available+to+book%2C179&price%5Bfilter%5D=0-1300%2C0_1300&page=1"; // TODO: move to .env
+const URL = process.env.URL;
 
 (async () => {
   console.log("booting up");

@@ -1,8 +1,5 @@
 import { writeFileSync } from "fs";
 import nodemailer from "nodemailer";
-import { config as dotenvConfig } from "dotenv";
-
-dotenvConfig();
 
 const SENDER_EMAIL = process.env.SENDER_EMAIL;
 const SENDER_EMAIL_PASSWORD = process.env.SENDER_EMAIL_PASSWORD;
