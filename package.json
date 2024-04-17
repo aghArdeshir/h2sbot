@@ -7,7 +7,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "nodemailer": "^6.9.13",
     "puppeteer": "^22.6.5"
   }
 }
-
