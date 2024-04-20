@@ -8,7 +8,7 @@ export function processHomes(homes) {
   // just in case, for debugging
   writeFileSync("homes.json", JSON.stringify(homes, null, 2));
 
-  console.log("filtering homes that was already processed in previous runs");
+  console.log("filtering out homes that was already processed in previous runs");
   let namesOfExistingHomesThatWeDontWant;
   try {
     namesOfExistingHomesThatWeDontWant = readFileSync(

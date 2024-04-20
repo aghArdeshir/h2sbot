@@ -6,6 +6,10 @@ const HEADLESS = true;
 const URL = process.env.URL;
 
 (async () => {
+  console.log();
+  console.log();
+  console.log();
+  console.log(new Date());
   console.log("booting up");
 
   const browser = await puppeteer.launch({ headless: HEADLESS });
