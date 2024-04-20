@@ -64,6 +64,8 @@ async function main() {
   console.log("navigated to the page");
 
   page.on("requestfinished", async (request) => {
+    console.log("requestfinished", request.url());
+
     let responseAsJson;
     try {
       responseAsJson = await (await request.response()).json();
