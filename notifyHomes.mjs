@@ -34,9 +34,9 @@ export function notifyHomes(homesToNotify) {
     },
   });
 
-  console.log("sending emails to ", RECEIVER_EMAILS.join(" and "));
-  RECEIVER_EMAILS.forEach((receiverEmail) => {
-    console.log("sending email to ", receiverEmail);
+  console.log("sending emails to ", RECEIVER_EMAILS.join(" and "), ":");
+  RECEIVER_EMAILS.forEach((receiverEmail, index) => {
+    console.log("  ", index + 1, ": sending email to ", receiverEmail);
     const mailOptions = {
       from: SENDER_EMAIL,
       to: receiverEmail,
