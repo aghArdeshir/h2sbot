@@ -38,7 +38,7 @@ async function main() {
 
   page.setRequestInterception(true);
   page.on("request", async (request) => {
-    if (interceptedRequest.isInterceptResolutionHandled()) return;
+    if (request.isInterceptResolutionHandled()) return;
 
     const requestUrl = request.url();
     for (const urlChunk of unimportantUrlsChunks) {
