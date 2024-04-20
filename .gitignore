@@ -3,3 +3,4 @@
 /homesThatWeDontWant.txt
 /homesToNotify.json
 /.env
+/screenshots/*.png
