@@ -1,5 +1,6 @@
 import { writeFileSync } from "fs";
 import nodemailer from "nodemailer";
+import { playNotificationSound } from "./play-sound.mjs";
 
 const SENDER_EMAIL = process.env.SENDER_EMAIL;
 const SENDER_EMAIL_PASSWORD = process.env.SENDER_EMAIL_PASSWORD;
@@ -52,4 +53,6 @@ export function notifyHomes(homesToNotify) {
       }
     });
   });
+
+  playNotificationSound();
 }
