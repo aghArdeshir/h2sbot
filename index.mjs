@@ -26,7 +26,7 @@ const unimportantUrlsChunks = [
   "webfonts",
 ];
 
-(async () => {
+async function main() {
   console.log();
   console.log();
   console.log();
@@ -92,4 +92,6 @@ const unimportantUrlsChunks = [
       clearTimeout(closePageTimeout);
     }
   });
-})();
+}
+
+main();
