@@ -84,11 +84,21 @@ async function main() {
     }
 
     if (homes.length > 0) {
+      // screenshot for debugging purposes
+      console.log('saving screenshot...')
+      page.screenshot({ path: `./screenshots/screenshot${new Date()}.png` });
+
       console.log("homes found, processing...");
       processHomes(homes);
 
-      console.log("closing browser");
-      await browser.close();
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          console.log("closing browser");
+          browser.close();
+          resolve();
+        }, 1000);
+      });
+
       clearTimeout(closePageTimeout);
     }
   });
