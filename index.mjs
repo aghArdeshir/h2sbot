@@ -5,6 +5,26 @@ import { processHomes } from "./processHomes.mjs";
 const HEADLESS = true;
 const URL = process.env.URL;
 
+const unimportantUrlsChunks = [
+  "favicon",
+  "pages/locations",
+  "pages/comingsoon",
+  "pages/about",
+  "pages/blog",
+  "pages/faq",
+  "trustpilot",
+  "image-manager",
+  "availablestartdate",
+  "image/svg+xml",
+  "pictures",
+  "floorplans",
+  "hotjar",
+  "static/media",
+  "images",
+  "chatbase",
+  "googletagmanager",
+];
+
 (async () => {
   console.log();
   console.log();
@@ -14,6 +34,19 @@ const URL = process.env.URL;
 
   const browser = await puppeteer.launch({ headless: HEADLESS });
   const page = await browser.newPage();
+
+  page.setRequestInterception(true);
+  page.on("request", async (request) => {
+    const requestUrl = request.url();
+    for (const urlChunk of unimportantUrlsChunks) {
+      if (requestUrl.includes(urlChunk)) {
+        request.abort();
+        return;
+      }
+    }
+    request.continue();
+  });
+
   await page.goto(URL);
 
   // so sometimes we can debug
@@ -24,9 +57,6 @@ const URL = process.env.URL;
     console.log("browser was not closed in 20 seconds, closing it now...");
     browser.close();
   }, 20000);
-
-  // TODO: add event listener for request and abort unnecessary requests so that
-  //       we don't get caught by cloudflare o whatever
 
   console.log("navigated to the page");
 
