@@ -38,6 +38,8 @@ const unimportantUrlsChunks = [
 
   page.setRequestInterception(true);
   page.on("request", async (request) => {
+    if (interceptedRequest.isInterceptResolutionHandled()) return;
+
     const requestUrl = request.url();
     for (const urlChunk of unimportantUrlsChunks) {
       if (requestUrl.includes(urlChunk)) {
