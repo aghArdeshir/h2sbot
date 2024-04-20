@@ -23,6 +23,7 @@ const unimportantUrlsChunks = [
   "images",
   "chatbase",
   "googletagmanager",
+  "webfonts",
 ];
 
 (async () => {
