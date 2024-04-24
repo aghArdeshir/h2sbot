@@ -112,10 +112,10 @@ async function main() {
 
     if (homes.length > 0) {
       // screenshot for debugging purposes
-      console.log('saving screenshot...')
+      console.log("saving screenshot...");
       page.screenshot({ path: `./screenshots/screenshot${new Date()}.png` });
 
-      console.log("homes found, processing...");
+      console.log(homes.length, "homes found, processing...");
       processHomes(homes);
 
       await new Promise((resolve) => {
