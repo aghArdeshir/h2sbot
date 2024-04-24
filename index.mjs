@@ -27,6 +27,17 @@ const unimportantUrlsChunks = [
   "auth",
 ];
 
+const unimportantGraphqlRequestPayloadChunks = [
+  "entity_type",
+  "getCategoryAvailableSortMethods",
+  "getCategoryData",
+  "customAttributeMetadata",
+];
+
+// these are the important chunks from graphql query payload:
+// 'GetFilterInputsForCategory'
+// 'getPageSize'
+
 async function main() {
   console.log();
   console.log();
@@ -48,6 +59,19 @@ async function main() {
         return;
       }
     }
+
+    const requestPayload = request.postData();
+    if (requestUrl.endsWith("graphql/")) {
+      if (requestPayload) {
+        for (const payloadChunk of unimportantGraphqlRequestPayloadChunks) {
+          if (requestPayload.includes(payloadChunk)) {
+            request.abort();
+            return;
+          }
+        }
+      }
+    }
+
     request.continue();
   });
 
