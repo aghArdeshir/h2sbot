@@ -24,6 +24,7 @@ const unimportantUrlsChunks = [
   "chatbase",
   "googletagmanager",
   "webfonts",
+  "auth",
 ];
 
 async function main() {
