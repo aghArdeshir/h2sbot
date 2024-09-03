@@ -17,5 +17,5 @@ node index.mjs
 
 or to run every 10 minutes:
 ```
-while true ; do node index.mjs ; sleep 600; echo sleeping ; done
+while true ; do node index.mjs ; echo sleeping ; sleep 600 ; done
 ```
