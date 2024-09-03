@@ -8,7 +8,6 @@ cd h2sbot
 cp .env.example .env
 vim .env # and modify
 npm i
-npx puppeteer browsers install chromium@latest
 ```
 
 # Run:
@@ -18,5 +17,5 @@ node index.mjs
 
 or to run every 10 minutes:
 ```
-while true ; do node index.mjs ; sleep 600 ; done
+while true ; do node index.mjs ; sleep 600; echo sleeping ; done
 ```
