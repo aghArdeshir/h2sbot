@@ -2,6 +2,8 @@ import { readFileSync, writeFileSync } from "fs";
 import { notifyHomes } from "./notifyHomes.mjs";
 
 const HOMES_THAT_WE_DONT_WANT_FILE = "homesThatWeDontWant.txt";
+const MINIMUM_LIVING_AREA = Number(process.env.MINIMUM_LIVING_AREA);
+const MAXIMUM_PRICE = Number(process.env.MAXIMUM_PRICE);
 
 export function processHomes(homes) {
   // just in case, for debugging
@@ -10,6 +12,7 @@ export function processHomes(homes) {
   console.log(
     "filtering out homes that was already processed in previous runs"
   );
+
   let namesOfExistingHomesThatWeDontWant;
   try {
     namesOfExistingHomesThatWeDontWant = readFileSync(
@@ -22,9 +25,34 @@ export function processHomes(homes) {
     namesOfExistingHomesThatWeDontWant = [];
   }
 
+  let namesOfHomesThatAreTooSmall = [];
+  if (MINIMUM_LIVING_AREA) {
+    namesOfHomesThatAreTooSmall = homes
+      .filter((home) => {
+        return home.living_area <= MINIMUM_LIVING_AREA;
+      })
+      .map((home) => {
+        return home.name;
+      });
+  }
+
+  let namesOfHomesThatAreTooExpensive = [];
+  if (MAXIMUM_PRICE) {
+    namesOfHomesThatAreTooExpensive = homes
+      .filter((home) => {
+        return home.basic_rent >= MAXIMUM_PRICE;
+      })
+      .map((home) => {
+        return home.name;
+      });
+  }
+
   const aggregatedNamesOfHomesThatWeDontWant = [
     ...namesOfExistingHomesThatWeDontWant,
+    ...namesOfHomesThatAreTooSmall,
+    ...namesOfHomesThatAreTooExpensive,
   ].filter((name, index, self) => {
+    // remove duplicates
     return self.indexOf(name) === index;
   });
 
