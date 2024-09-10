@@ -1,4 +1,4 @@
-Checks a URL from Holland2Stay.com and notifies by email if any new entry is added
+Fetches homes from Holland2Stay.com and notifies by email if any new bokable entry is added
 
 ### Prepare:
 
