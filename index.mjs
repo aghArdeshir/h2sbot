@@ -1,6 +1,6 @@
 import "./setup-env.mjs";
 import { processHomes } from "./processHomes.mjs";
-import { fetchDataByCurl } from "./with-curl.mjs";
+import { fetchHomesFromH2s } from "./with-curl.mjs";
 
 async function main() {
   console.log();
@@ -9,8 +9,9 @@ async function main() {
   console.log(new Date());
   console.log("booting up");
 
+  console.log("fetching bookable homes...");
   let homes = [];
-  const { items, pageInfo } = await fetchDataByCurl();
+  const { items, pageInfo } = await fetchHomesFromH2s();
 
   homes = items;
 
