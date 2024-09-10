@@ -1,6 +1,6 @@
 import "./setup-env.mjs";
 import { processHomes } from "./processHomes.mjs";
-import { fetchHomesFromH2s } from "./with-curl.mjs";
+import { fetchHomesFromH2s } from "./fetch-homes.mjs";
 
 async function main() {
   console.log();
